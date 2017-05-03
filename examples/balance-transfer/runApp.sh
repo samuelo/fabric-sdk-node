@@ -1,23 +1,23 @@
 #!/bin/bash
 
 function dkcl(){
-        CONTAINER_IDS=$(docker ps -aq)
+        CONTAINER_IDS=$(docker ps -a | grep "dev-peer[0-9]-.*chaincode.*Exited" | awk '{print $1}')
 	echo
         if [ -z "$CONTAINER_IDS" -o "$CONTAINER_IDS" = " " ]; then
                 echo "========== No containers available for deletion =========="
         else
-                docker rm -f $CONTAINER_IDS
+                docker rm $CONTAINER_IDS
         fi
 	echo
 }
 
 function dkrm(){
-        DOCKER_IMAGE_IDS=$(docker images | grep "dev\|none\|test-vp\|peer[0-9]-" | awk '{print $3}')
+        DOCKER_IMAGE_IDS=$(docker images | grep "dev-peer[0-9]-" | awk '{print $3}')
 	echo
         if [ -z "$DOCKER_IMAGE_IDS" -o "$DOCKER_IMAGE_IDS" = " " ]; then
 		echo "========== No images available for deletion ==========="
         else
-                docker rmi -f $DOCKER_IMAGE_IDS
+                docker rmi $DOCKER_IMAGE_IDS
         fi
 	echo
 }

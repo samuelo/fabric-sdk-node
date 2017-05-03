@@ -33,8 +33,8 @@ services:
     image: hyperledger/fabric-orderer:x86_64-1.0.0-alpha
     environment:
       - GRPC_TRACE=all
-      - GRPC_VERBOSITY=debug
-      - ORDERER_GENERAL_LOGLEVEL=debug
+      - GRPC_VERBOSITY=info
+      - ORDERER_GENERAL_LOGLEVEL=info
       - ORDERER_GENERAL_LISTENADDRESS=0.0.0.0
       - ORDERER_GENERAL_GENESISMETHOD=file
       - ORDERER_GENERAL_GENESISFILE=/etc/hyperledger/configtx/twoorgs.orderer.block
@@ -58,7 +58,7 @@ services:
     container_name: peer0
     image: hyperledger/fabric-peer:x86_64-1.0.0-alpha
     environment:
-      - CORE_LOGGING_LEVEL=DEBUG
+      - CORE_LOGGING_LEVEL=INFO
       - CORE_NEXT=true
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
       - CORE_PEER_ID=peer0

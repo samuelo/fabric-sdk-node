@@ -16,6 +16,7 @@
 'use strict';
 var log4js = require('log4js');
 var logger = log4js.getLogger('Helper');
+logger.setLevel(logger.INFO);
 var path = require('path');
 var util = require('util');
 var fs = require('fs');
@@ -29,7 +30,6 @@ var config = require('../config.json');
 var hfc = require('fabric-client');
 hfc.addConfigFile(path.join(__dirname, 'network-config.json'));
 var ORGS = hfc.getConfigSetting('network-config');
-logger.setLevel('DEBUG');
 exports.hfc = hfc;
 var client1 = new hfc();
 var chain1 = client1.newChain(config.channelName);
@@ -254,7 +254,7 @@ var setupChaincodeDeploy = function() {
 };
 var getLogger = function(moduleName) {
 	var logger = log4js.getLogger(moduleName);
-	logger.setLevel('DEBUG');
+	logger.setLevel('INFO');
 	return logger;
 };
 var getOrgName = function(org) {
